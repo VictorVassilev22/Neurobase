@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  tgi:
+    image: ghcr.io/huggingface/text-generation-inference:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./models:/data
+    shm_size: '6gb'
+    environment:
+      MODEL_ID: TheBloke/Mistral-7B-Instruct-v0.2-AWQ
+      MAX_TOTAL_TOKENS: 3072     
+      MAX_INPUT_LENGTH: 2048
+      QUANTIZE: awq
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
