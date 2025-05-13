@@ -19,7 +19,7 @@ Ask it questions about your own source files — powered by local embeddings + a
 ### 1. Clone + Setup Environment
 
 ```bash
-git clone https://github.com/yourusername/neurobase
+git clone https://github.com/VictorVassilev22/Neurobase
 cd neurobase
 
 # (Optional) Create and activate a Conda env
