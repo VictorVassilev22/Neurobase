@@ -1,4 +1,4 @@
-# 🧠 Neurobase — Simple Local AI for Your Codebase
+# 🧠 Neurobase — Local AI for Your Codebase
 
 **Neurobase** is a zero-setup, CLI-first AI assistant you run directly inside your codebase.  
 Ask it questions about your own source files — powered by local embeddings + a local LLM served via Docker HuggingFace TGI Container.
