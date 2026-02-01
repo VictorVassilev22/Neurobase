@@ -7,11 +7,11 @@ from langchain_core.runnables import RunnableMap, RunnableLambda
 
 
 
-# 📁 Vector DB directory
+# Vector DB directory
 vectorstore_dir = get_vectorstore_dir("./")
 # print(f"📂 Vectorstore directory: {vectorstore_dir}")
 
-# 🧠 Load LLM endpoint
+# Load LLM endpoint
 llm = HuggingFaceEndpoint(
     endpoint_url=LLM_ENDPOINT,
     max_new_tokens=768,
@@ -21,7 +21,7 @@ llm = HuggingFaceEndpoint(
     repetition_penalty=1.4,
 )
 
-# 🧠 Vector DB + Retriever setup
+# Vector DB + Retriever setup
 db = Chroma(
     persist_directory=vectorstore_dir,
     embedding_function=HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL, encode_kwargs={"normalize_embeddings": True})
@@ -39,7 +39,7 @@ retriever = db.as_retriever(
                    "lambda_mult": 0.7} # precision vs recall tradeoff
 )
 
-# 🧠 MAP (per-document) prompt
+# MAP (per-document) prompt
 map_prompt = PromptTemplate.from_template("""
 You are a highly skilled AI assistant helping developers understand their codebase. Analyze the following file snippet and answer the developer's question based on the content provided.
 
@@ -58,7 +58,7 @@ Instructions:
 Respond concisely and with technical clarity.
 """)
 
-# 🧠 REDUCE (merge answers) prompt
+# REDUCE (merge answers) prompt
 reduce_prompt = PromptTemplate.from_template("""
 Developer Question:
 {question}
@@ -100,8 +100,8 @@ combine_chain = (
 
 
 
-# 🎯 Main runner
-# 🎯 Main Entry Point
+# Main runner
+# Main Entry Point
 def run_query(question: str):
     print(f"🔎 Question: {question}")
     docs = retriever.invoke(question)

@@ -9,7 +9,7 @@ from collections import Counter
 
 vectorstore_dir = get_vectorstore_dir("./")
 
-# 🧠 Initialize LLM
+# Initialize LLM
 llm = HuggingFaceEndpoint(
     endpoint_url=LLM_ENDPOINT,
     max_new_tokens=256, # The maximum number of tokens to generate in the output.
@@ -20,7 +20,7 @@ llm = HuggingFaceEndpoint(
 )
 
 
-# 🧠 Initialize Vector Store + Retriever
+# Initialize Vector Store + Retriever
 db = Chroma(
     persist_directory=vectorstore_dir,
     embedding_function=HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL, encode_kwargs={"normalize_embeddings": True})
@@ -90,7 +90,7 @@ Refined Answer:
 """)
 
 
-# 🔗 Build QA Chain
+# Build QA Chain
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=retriever,
@@ -105,7 +105,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 
-# 🎯 Main Entry Point
+# Main Entry Point
 def run_query(question: str):
     print(f"🔎 Question: {question}")
     result = qa_chain.invoke({"query": question})
